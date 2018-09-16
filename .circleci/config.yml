@@ -35,7 +35,7 @@ jobs:
 
       - run:
           name: End to End Testing
-          command: npm e2e
+          command: npm run e2e
 
       - run:
           name: Build Production Site
