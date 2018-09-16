@@ -15,7 +15,7 @@ jobs:
 
       - run: pwd
 
-      - run: ll
+      - run: ls -lah
 
       - restore_cache:
           keys:
