@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: timbru31/java-node:alpine
+      - image: circleci/node:chakracore-8.11-browsers
 
     working_directory: ~/compliment-it-ui
 
@@ -25,6 +25,23 @@ jobs:
           paths:
             - ~/node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # run tests!
-      - run: npm test
+
+      - run:
+          name: Linting
+          command: npm run lint
+
+      - run:
+          name: Unit Testing
+          command: npm test
+
+      - run:
+          name: End to End Testing
+          command: npm e2e
+
+      - run:
+          name: Build Production Site
+          command: npm run build
+
+      - store_artifacts:
+          path: ./dist/compliment-it-ui
+          destination: dist
