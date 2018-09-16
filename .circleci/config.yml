@@ -8,10 +8,14 @@ jobs:
     docker:
       - image: timbru31/java-node:alpine
 
-    working_directory: ~/compliment-it
+    working_directory: ~/
 
     steps:
       - checkout
+
+      - run: pwd
+
+      - run: ll
 
       - restore_cache:
           keys:
