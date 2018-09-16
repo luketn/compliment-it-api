@@ -14,10 +14,6 @@ jobs:
       - checkout:
           path: ~/
 
-      - run: pwd
-
-      - run: ls -lah
-
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
