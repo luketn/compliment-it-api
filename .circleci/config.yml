@@ -8,24 +8,22 @@ jobs:
     docker:
       - image: timbru31/java-node:alpine
 
-    working_directory: ~/repo
+    working_directory: ~/compliment-it
 
     steps:
       - checkout
 
-      - run: cd compliment-it-ui
-
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-{{ checksum "compliment-it-ui/package.json" }}
           - v1-dependencies-
 
       - run: npm install
 
       - save_cache:
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+            - compliment-it-ui/node_modules
+          key: v1-dependencies-{{ checksum "compliment-it-ui/package.json" }}
         
       # run tests!
       - run: npm test
