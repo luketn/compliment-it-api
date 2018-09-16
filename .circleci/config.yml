@@ -8,11 +8,11 @@ jobs:
     docker:
       - image: circleci/node:chakracore-8.11-browsers
 
-    working_directory: ~/compliment-it-ui
+    working_directory: ~/ci/compliment-it-ui
 
     steps:
       - checkout:
-          path: ~/
+          path: ~/ci/
 
       - restore_cache:
           keys:
@@ -22,7 +22,7 @@ jobs:
 
       - save_cache:
           paths:
-            - ~/node_modules
+            - node_modules
           key: v2-dependencies-{{ checksum "package.json" }}
 
       - run:
