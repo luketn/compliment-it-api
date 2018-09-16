@@ -15,15 +15,15 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "compliment-it-ui/package.json" }}
+          - v1-dependencies-{{ checksum "~/compliment-it-ui/package.json" }}
           - v1-dependencies-
 
       - run: npm install
 
       - save_cache:
           paths:
-            - compliment-it-ui/node_modules
-          key: v1-dependencies-{{ checksum "compliment-it-ui/package.json" }}
+            - ~/compliment-it-ui/node_modules
+          key: v1-dependencies-{{ checksum "~/compliment-it-ui/package.json" }}
         
       # run tests!
       - run: npm test
