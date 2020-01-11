@@ -6,50 +6,50 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:chakracore-8.11-browsers
+      - image: circleci/node:12
 
-    working_directory: ~/ci/compliment-it-ui
+    working_directory: ~/repo
 
     steps:
-      - checkout:
-          path: ~/ci/
+      - checkout
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm install
 
       - save_cache:
           paths:
             - node_modules
-          key: v2-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-          name: Linting
-          command: npm run lint
-
-      - run: mkdir -p tests/junit
+          name: Lint
+          command: npm run tslint
 
       - run:
-          name: Unit Testing
-          command: npm test
+          name: Run Tests
+          command: npm run test-ci
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
 
       - store_test_results:
-          path: tests/junit
-
-      - run:
-          name: End to End Testing
-          command: npm run e2e
-
-      - run:
-          name: Build Production Site
-          command: npm run build
+          path: reports
 
       - store_artifacts:
-          path: ./coverage
+          path: coverage/lcov-report
           destination: coverage
 
+      - run:
+          name: Create code coverage badge
+          command: npm run coverage-badge
+          when: always
+
       - store_artifacts:
-          path: ./dist/compliment-it-ui
-          destination: dist
+          path: coverage.svg
+          destination: coverage.svg
+
+      - run:
+          name: Deploy to AWS
+          command: npm run compile-deploy

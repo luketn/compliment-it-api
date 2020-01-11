@@ -1,0 +1,43 @@
+{
+  "name": "aws-lambda-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test-ci": "jest --ci --reporters=default --reporters=jest-junit",
+    "coverage-badge": "lcov-badge-generator -o ./coverage.svg ./coverage/lcov.info",
+    "compile-deploy": "tsc && sls deploy",
+    "serverless-local": "tsc && sls invoke local -f http --data '{\"path\":\"/\"}'",
+    "typescript-compile": "tsc",
+    "typescript-initialize": "tsc --init",
+    "jest-initialize": "jest --init",
+    "tslint-initialize": "tslint --init",
+    "tslint": "tslint -c tslint.json *.ts",
+    "tslint-fix": "tslint -c tslint.json *.ts --fix",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luketn/aws-lambda-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luketn/aws-lambda-app/issues"
+  },
+  "homepage": "https://github.com/luketn/aws-lambda-app#readme",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.36",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.12",
+    "jest": "^24.9.0",
+    "jest-junit": "^9.0.0",
+    "lcov-badge-generator": "^1.0.5",
+    "serverless": "^1.58.0",
+    "serverless-domain-manager": "^3.3.0",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2",
+    "underscore.string": ">=3.3.5"
+  }
+}
