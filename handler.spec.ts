@@ -7,7 +7,7 @@ describe("Handler", () => {
         expect(response.statusCode).toBe(200);
     });
     it("should return a positive response for index.html on subpath", async () => {
-        const response = await http({path: "/aws-lambda-app/index.html"} as APIGatewayProxyEvent);
+        const response = await http({path: "/compliment-it-api/index.html"} as APIGatewayProxyEvent);
         expect(response.statusCode).toBe(200);
     });
     it("should return a 404 for an unknown path", async () => {

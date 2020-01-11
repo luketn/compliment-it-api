@@ -5,17 +5,19 @@ import {FallbackHandler} from "./handler-fallback";
 import {QuoteApiHandler} from "./handler-quote-api";
 import {IndexHtmlHandler} from "./handler-index-html";
 import {HttpEventHandler} from "./interfaces";
+import {ComplimentsHandler} from "./handler-compliments";
 
 const fallbackHandler = new FallbackHandler();
 const handlers: HttpEventHandler[] = [
     new IndexHtmlHandler(),
     new QuoteApiHandler(),
+    new ComplimentsHandler(),
 ];
 
 export const http = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    // normalise the path no matter whether the request is on the API Gateway URL or the api.mycodefu.com/aws-lambda-app URL
-    if (event.path.startsWith("/aws-lambda-app")) {
-        event.path = event.path.substr("/aws-lambda-app".length);
+    // normalise the path no matter whether the request is on the API Gateway URL or the api.compliment.it/compliment-it-api URL
+    if (event.path.startsWith("/compliment-it-api")) {
+        event.path = event.path.substr("/compliment-it-api".length);
     }
 
     let result: APIGatewayProxyResult | undefined;
