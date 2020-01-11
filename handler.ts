@@ -1,6 +1,6 @@
 "use strict";
 
-import {APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
+import {APIGatewayEventRequestContext, APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
 import {FallbackHandler} from "./handler-fallback";
 import {QuoteApiHandler} from "./handler-quote-api";
 import {IndexHtmlHandler} from "./handler-index-html";
@@ -14,7 +14,7 @@ const handlers: HttpEventHandler[] = [
     new ComplimentsHandler(),
 ];
 
-export const http = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+export const http = async (event: APIGatewayProxyEvent, context: APIGatewayEventRequestContext): Promise<APIGatewayProxyResult> => {
     // normalise the path no matter whether the request is on the API Gateway URL or the api.compliment.it/compliment-it-api URL
     if (event.path.startsWith("/compliment-it-api")) {
         event.path = event.path.substr("/compliment-it-api".length);
@@ -22,8 +22,8 @@ export const http = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
 
     let result: APIGatewayProxyResult | undefined;
     for (const handler of handlers) {
-        if (handler.canHandleThis(event)) {
-            result = await handler.handle(event);
+        if (handler.canHandleThis(event, context)) {
+            result = await handler.handle(event, context);
             break;
         }
     }
