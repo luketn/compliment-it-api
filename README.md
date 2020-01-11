@@ -4,4 +4,6 @@
 )
 
 # compliment.it
-The compliment.it web site and services.
+A web site intended to increase the number of compliments given and received in the world.
+
+https://compliment.it

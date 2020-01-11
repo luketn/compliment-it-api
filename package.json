@@ -1,11 +1,12 @@
 {
-  "name": "aws-lambda-app",
-  "version": "1.0.0",
-  "description": "",
+  "name": "compliment-it",
+  "version": "0.0.1",
+  "description": "A web site intended to increase the number of compliments given and received in the world.",
   "main": "handler.js",
   "scripts": {
     "test-ci": "jest --ci --reporters=default --reporters=jest-junit",
     "coverage-badge": "lcov-badge-generator -o ./coverage.svg ./coverage/lcov.info",
+    "create-api-domain-once-only": "sls create_domain",
     "compile-deploy": "tsc && sls deploy",
     "serverless-local": "tsc && sls invoke local -f http --data '{\"path\":\"/\"}'",
     "typescript-compile": "tsc",

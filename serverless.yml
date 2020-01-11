@@ -1,4 +1,4 @@
-service: aws-lambda-app
+service: compliment-it
 #ref: https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/
 
 provider:
@@ -6,6 +6,7 @@ provider:
   runtime: nodejs12.x
   stage: prod
   region: us-east-1
+  endpointType: REGIONAL
 
 functions:
   http:
@@ -43,6 +44,8 @@ plugins:
 custom:
   customDomain:
     domainName: api.compliment.it
-    basePath: 'compliment-it'
+    certificateName: api.compliment.it
+    endpointType: 'regional'
+    basePath: ''
     stage: ${self:provider.stage}
-    createRoute53Record: false
+    createRoute53Record: true
