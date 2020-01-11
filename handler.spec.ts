@@ -1,17 +1,17 @@
-import {APIGatewayEventRequestContext, APIGatewayProxyEvent, APIGatewayProxyResult, Context} from "aws-lambda";
+import {APIGatewayEventRequestContext, APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
 import {addOriginResponseHeader, http} from "./handler";
 
 describe("Handler", () => {
     it("should return a positive response for index.html on root", async () => {
-        const response = await http({path: "/index.html"} as APIGatewayProxyEvent);
+        const response = await http({path: "/index.html"} as APIGatewayProxyEvent, {} as APIGatewayEventRequestContext);
         expect(response.statusCode).toBe(200);
     });
     it("should return a positive response for index.html on subpath", async () => {
-        const response = await http({path: "/compliment-it-api/index.html"} as APIGatewayProxyEvent);
+        const response = await http({path: "/compliment-it-api/index.html"} as APIGatewayProxyEvent, {} as APIGatewayEventRequestContext);
         expect(response.statusCode).toBe(200);
     });
     it("should return a 404 for an unknown path", async () => {
-        const response = await http({path: "/unknown-path"} as APIGatewayProxyEvent);
+        const response = await http({path: "/unknown-path"} as APIGatewayProxyEvent, {} as APIGatewayEventRequestContext);
         expect(response.statusCode).toBe(404);
     });
     it("should add CORS response", async () => {
@@ -28,7 +28,7 @@ describe("Handler", () => {
             requestContext: {} as APIGatewayEventRequestContext,
             resource: "",
             stageVariables: {},
-        } as APIGatewayProxyEvent);
+        } as APIGatewayProxyEvent, {} as APIGatewayEventRequestContext);
         expect(response.statusCode).toBe(200);
         expect(response.headers).toEqual({
             "Content-Type": "text/html",
