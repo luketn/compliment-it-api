@@ -16,8 +16,8 @@ const handlers: HttpEventHandler[] = [
 
 export const http = async (event: APIGatewayProxyEvent, context: APIGatewayEventRequestContext): Promise<APIGatewayProxyResult> => {
     // normalise the path no matter whether the request is on the API Gateway URL or the api.compliment.it/compliment-it-api URL
-    if (event.path.startsWith("/compliment-it-api")) {
-        event.path = event.path.substr("/compliment-it-api".length);
+    if (event.path.startsWith("/compliment-it-api/api")) {
+        event.path = event.path.substr("/compliment-it-api/api".length);
     }
 
     let result: APIGatewayProxyResult | undefined;
