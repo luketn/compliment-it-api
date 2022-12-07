@@ -35,7 +35,7 @@
     "jest": "^24.9.0",
     "jest-junit": "^9.0.0",
     "lcov-badge-generator": "^1.0.5",
-    "serverless": "^1.58.0",
+    "serverless": "^3.25.1",
     "serverless-domain-manager": "^3.3.0",
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
